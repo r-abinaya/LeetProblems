@@ -12,7 +12,7 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-        int c = 0;
+     int c = 0;
     ListNode newHead(0);
     ListNode *t = &newHead;
     while(c || l1 || l2) {
