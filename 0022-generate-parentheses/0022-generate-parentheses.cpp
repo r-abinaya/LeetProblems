@@ -1,32 +1,27 @@
 class Solution {
 public:
     
-        vector<string> result;
-     vector<string> generateParenthesis(int n) {
-     helper("", n, 0);
-     return result;
-}
+  vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        backtrace(res, "", 0, 0, n);
+        return res;
+    }
+    
+ private:
+    void backtrace(vector<string>& res, string str, int start, int end, int max) {
+        if(str.length() == max * 2) {
+            res.push_back(str);
+            return;
+        }
+        if(start < max) { // open parenthesis num is less than max
+            backtrace(res, str+"(", start+1, end, max);
+        }
+        if(end < start) {// close parenthesis num is less than open num
+            backtrace(res, str+")", start, end+1, max);
+        }
+    }
+    
 
-/*  this hepler function insert result strings to "vector<string> result"
-	When number of '(' less than "n", can append '(';
-	When number of '(' is more than number of ')', can append ')';
 
-	string s : current string;
-	int leftpare_need : number of '(' that have not put into "string s";
-	int moreleft : number of '(' minus number of ')' in the "string s";
-*/
-
-void helper(string s, int leftpare_need, int moreleft)
-{
-	if(leftpare_need == 0 && moreleft == 0)
-	{
-	    result.push_back(s);
-	    return;
-	}
-	if(leftpare_need > 0)
-		helper(s + "(", leftpare_need - 1, moreleft+1);
-	if(moreleft > 0)
-		helper(s + ")", leftpare_need, moreleft - 1);
-}
     
 };
