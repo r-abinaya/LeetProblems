@@ -1,18 +1,41 @@
 class Solution {
-public:
-    vector<vector<int>> generate(int numRows) {
-        vector<vector<int>> res;
-		vector<int> prev,next;
-		prev.push_back(1);
-		res.push_back(prev);
-		for(int i=1;i<numRows;i++) {
-			next=vector<int>(i+1,1);  //initialize a vector with 1 for n values 
-			for(int j=1;j<i;j++) {
-				next[j]=prev[j]+prev[j-1];    //update the vactor except first and last with sum values
-			}
-			res.push_back(next);   //push vector into the result vector
-			prev=next;
-		}
-		return res;
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result= new ArrayList<List<Integer>>();
+        List<Integer> prev=new ArrayList<Integer>();
+        prev.add(1);
+        result.add(prev);
+        for(int i=1;i<numRows;i++)
+        {
+            List<Integer> next=new ArrayList<Integer>();
+            for(int j=0;j<=i;j++)
+            {
+                if(j==0 ||j==i)
+                    next.add(1);
+                else
+                   next.add(result.get(i-1).get(j-1)+result.get(i-1).get(j));   
+            }
+            result.add(next);
+            prev=next;
+        }
+        return result;
+        
     }
-};
+}
+
+
+
+ //        if (numRows <=0){
+ //            return triangle;
+ //        }
+ //        for (int i=0; i<numRows; i++){
+ //            List<Integer> row =  new ArrayList<Integer>();
+ //            for (int j=0; j<i+1; j++){
+ //                if (j==0 || j==i){
+ //                    row.add(1);
+ //                } else {
+ //                    row.add(triangle.get(i-1).get(j-1)+triangle.get(i-1).get(j));
+ //                }
+ //            }
+ //            triangle.add(row);
+ //        }
+ //        return triangle;
