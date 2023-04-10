@@ -1,12 +1,12 @@
 class Solution {
-public:
-    int numUniqueEmails(vector<string>& emails) {
-        for(auto& email:emails){
-            auto at_location = find(email.begin(),email.end(),'@');
-            auto end_after_removing_dots = remove(email.begin(),at_location,'.');
-			auto plus_location = find(email.begin(),end_after_removing_dots,'+');
-            email.erase(plus_location,at_location);
+    public int numUniqueEmails(String[] emails) {
+        Set<String> normalize =new HashSet<String>();
+        for(String email:emails)
+        {
+            String[] parts=email.split("@");
+            String[] local=parts[0].split("\\+");
+            normalize.add(local[0].replace(".","")+"@"+parts[1]);
         }
-        return unordered_set(emails.begin(),emails.end()).size();
+        return normalize.size();
     }
-};
+}
