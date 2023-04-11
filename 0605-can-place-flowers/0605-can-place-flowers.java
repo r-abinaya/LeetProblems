@@ -1,16 +1,17 @@
 class Solution {
-public:
-    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-       flowerbed.insert(flowerbed.begin(),0);
-       flowerbed.push_back(0);
-        for(int i=1;i<flowerbed.size()-1;i++)
-        {
-            if(flowerbed[i-1]+flowerbed[i]+flowerbed[i+1]==0)
-            {
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+         if (n == 0) {
+            return true;
+        }
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 0 && (i == 0 || flowerbed[i-1] == 0) && (i == flowerbed.length-1 || flowerbed[i+1]   == 0)) {
+                flowerbed[i] = 1;
                 n--;
-                i++;
+                if (n == 0) {
+                    return true;
+                }
             }
         }
-        return n<=0;
+        return false;
     }
-};
+}
