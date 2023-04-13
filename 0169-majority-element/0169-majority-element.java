@@ -1,30 +1,26 @@
 class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-       int key=0;
+    public int majorityElement(int[] nums) {
         int element=0;
-        int n=nums.size();
-        map<int,int>m;
-        for(int i=0;i<n;i++)
+        int n=nums.length;
+        Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
+        for(int num:nums)
         {
-            m[nums[i]]++;
-        }
-        for(auto i=m.begin();i!=m.end();i++)
-        {
-            if(i->second>key)
+            if(!mp.containsKey(num))
             {
-                key=i->second;
-                element=i->first;
-             }
+                mp.put(num,1);
+            }
+            else
+                mp.put(num,mp.get(num)+1);
+            if(mp.get(num)>nums.length/2)
+            {
+                element=num;
+                break;
+            }
         }
         return element;
     }
-};
+}
 
-
-       
-      
-          
-
-
-       
+ 
+    
+    
