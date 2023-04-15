@@ -1,24 +1,23 @@
 class Solution {
-public:
-    int maxNumberOfBalloons(string text) {
-          map<char,int> mp;
-        for(int i=0;i<text.length();i++)
-        {
-            mp[text[i]]++;
-        }
-        string t="balloon";
-        int count=0;
-        while(true)
-        {
-            for(int i=0;i<t.length();i++)
-            {
-                if(mp[t[i]]!=0)
-                mp[t[i]]--;
-                else
-                    return count;
+    public int maxNumberOfBalloons(String text) {
+        int b = 0, a = 0, l = 0, o = 0, n = 0;
+        
+        for(char ch : text.toCharArray()){
+            switch(ch){
+                case 'b': ++b;
+                        break;
+                case 'a': ++a;
+                        break;
+                case 'l': ++l;
+                        break;
+                case 'o': ++o;
+                        break;
+                case 'n': ++n;
+                        break;
+            
             }
-            count++;
         }
-        return 0;
+        
+        return Math.min(Math.min(o/2, l/2), Math.min(Math.min(b, a), n));
     }
-};
+}
