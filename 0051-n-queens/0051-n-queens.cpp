@@ -36,7 +36,7 @@ public:
         return true;
         
     }
-    void solve(int col,vector<string> board,vector<vector<string>> &ans,int n)
+    void solve(int col,vector<string> board,vector<vector<string>> &ans, vector<int> leftRow, vector<int> upperdiagonal, vector<int> lowerdiagonal,int n)
     {
         if(col==n)
         {
@@ -45,11 +45,19 @@ public:
         }
         for(int row=0;row<n;row++)
         {
-            if(isSafe(row,col,board,n))
-            {
+            if( leftRow[row]!=1 &&
+                upperdiagonal[col+row]!=1 &&
+                lowerdiagonal[n-1+col-row]!=1){
                 board[row][col]='Q';
-                solve(col+1,board,ans,n);
+                leftRow[row]=1;
+                upperdiagonal[col+row]=1;
+                lowerdiagonal[n-1+col-row]=1;
+            
+                solve(col+1,board,ans,leftRow,upperdiagonal,lowerdiagonal,n);
                 board[row][col]='.';
+                leftRow[row]=0;
+                upperdiagonal[col+row]=0;
+                lowerdiagonal[n-1+col-row]=0;
             }
         }
     }
@@ -59,7 +67,8 @@ public:
         vector<string> board(n);
         for(int i=0;i<n;i++)
             board[i]=s;
-        solve(0,board,ans,n);
+        vector<int> leftRow(n,0), upperdiagonal(2*n-1,0), lowerdiagonal(2*n-1,0);
+        solve(0,board,ans,leftRow,upperdiagonal,lowerdiagonal,n);
         return ans;
     }
 };
