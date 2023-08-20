@@ -13,7 +13,7 @@ public:
                 //this is to check if stack is empty, if so we will just take the                 //index
                 ans=max(ans,top*(i-ran-1));
                 // this is just to take the max area covered so far
-            }
+            }   
             st.push(i);
             //we push into the stack as long as it satsifies our stack condition
         }
@@ -29,3 +29,14 @@ public:
         
 	
        
+
+
+
+
+
+
+
+
+
+
+
