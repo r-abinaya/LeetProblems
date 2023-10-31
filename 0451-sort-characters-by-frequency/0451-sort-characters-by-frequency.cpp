@@ -1,35 +1,27 @@
 class Solution {
 public:
-    // bool comparator()
-    // {
-    //     if(mp1.second>mp2.second)
-    //         return true;
-    //     return false;
-    // }
     string frequencySort(string s) {
-        // map<char,int> mp;
-        //  for(int i=0;i<s.length();i++)
-        //  {
-        //         mp[s[i]]++;
-        //  }
-        // sort(mp.begin(),mp.end(),comparator);
-        // string ans="";
-        // for(auto a:mp)
-        // {
-        //     while(a.second--)
-        //     {
-        //        ans+=a.first;
-        //     }
-        // }
-        // return ans;
-        int counts[256] = {0};
-        for (char ch : s)
-            ++counts[ch];
-        sort(s.begin(), s.end(), [&](char a, char b) { 
-            return counts[a] > counts[b] || (counts[a] == counts[b] && a < b); 
-        });
-        return s;
+        unordered_map<char,int> freq;
+        vector<string> bucket(s.size()+1, "");
+        string res;
+        
+        //count frequency of each character
+        for(char c:s) freq[c]++;
+        //put character into frequency bucket
+        for(auto& it:freq) {
+            int n = it.second;
+            char c = it.first;
+            bucket[n].append(n, c);
+        }
+        //form descending sorted string
+        for(int i=s.size(); i>0; i--) {
+            if(!bucket[i].empty())
+                res.append(bucket[i]);
+        }
+        return res;
 
     }
     
 };
+
+
